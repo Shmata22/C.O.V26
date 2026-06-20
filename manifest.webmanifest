@@ -1,0 +1,18 @@
+{
+  "name": "C.O.V",
+  "short_name": "C.O.V",
+  "description": "PWA lecture seule pour les stats COV",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#07142c",
+  "theme_color": "#07142c",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "logo-cov.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ]
+}

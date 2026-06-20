@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#07142c" />
+    <meta name="description" content="C.O.V - PWA iPhone et Android pour résultats, compo, stats et gestion coach" />
+    <title>C.O.V</title>
+    <link rel="manifest" href="manifest.webmanifest?v=COV25" />
+    <link rel="icon" type="image/webp" href="logo-cov.webp" />
+    <link rel="apple-touch-icon" href="logo-cov.webp" />
+    <link rel="stylesheet" href="styles.css?v=COV25" />
+  </head>
+  <body>
+    <div id="app" class="app-shell">
+      <header id="topbar" class="topbar">
+        <div id="headerLeft" class="header-side"></div>
+        <button id="headerHomeBtn" class="header-home-btn" type="button" aria-label="Accueil">
+          <img class="logo" src="logo-cov.webp" alt="Logo COV" />
+        </button>
+        <div class="header-side right">
+          <button id="seasonBtn" class="season-chip" type="button">--/--</button>
+        </div>
+      </header>
+
+      <section id="firebaseBanner" class="firebase-banner" hidden>Mode cache local actif. Vérifie la lecture Firebase web si les données ne se mettent pas à jour.</section>
+
+      <main id="viewMount" class="view active"></main>
+
+      <nav class="bottom-nav">
+        <button class="nav-btn active" data-view="home"><span class="nav-ico">🏠</span><span class="nav-label">Home</span></button>
+        <button class="nav-btn" data-view="players"><span class="nav-ico">👥</span><span class="nav-label">Joueurs</span></button>
+        <button class="nav-btn" data-view="results"><span class="nav-ico">📅</span><span class="nav-label">Matchs</span></button>
+        <button class="nav-btn" data-view="compo"><span class="nav-ico">⚽</span><span class="nav-label">Compo</span></button>
+        <button class="nav-btn" data-view="ranking"><span class="nav-ico">📊</span><span class="nav-label">Stats</span></button>
+        <button class="nav-btn" data-view="trophy"><span class="nav-ico">🏆</span><span class="nav-label">Trophée</span></button>
+        <button class="nav-btn" data-view="admin" hidden><span class="nav-ico">👑</span><span class="nav-label">Admin</span></button>
+        <button class="nav-btn" data-view="elevenmanage" hidden><span class="nav-ico">🧩</span><span class="nav-label">Onze</span></button>
+      </nav>
+    </div>
+
+    <dialog id="seasonDialog" class="modal">
+      <form method="dialog" class="modal-card">
+        <div class="modal-head">
+          <h2>Choisir saison</h2>
+          <button class="icon-btn" value="cancel" aria-label="Fermer">×</button>
+        </div>
+        <div id="seasonList" class="season-list"></div>
+        <div class="modal-actions">
+          <button value="cancel" class="secondary-btn">Fermer</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="playerDialog" class="modal player-modal">
+      <form method="dialog" class="modal-card large">
+        <div class="modal-head">
+          <h2 id="playerDialogTitle">Fiche joueur</h2>
+          <button class="icon-btn" value="cancel" aria-label="Fermer">×</button>
+        </div>
+        <div id="playerDialogBody"></div>
+      </form>
+    </dialog>
+    <dialog id="matchDialog" class="modal match-modal">
+      <form method="dialog" class="modal-card large">
+        <div class="modal-head">
+          <h2 id="matchDialogTitle">Détail du match</h2>
+          <button class="icon-btn" value="cancel" aria-label="Fermer">×</button>
+        </div>
+        <div id="matchDialogBody"></div>
+      </form>
+    </dialog>
+
+
+    <dialog id="featureDialog" class="modal feature-modal">
+      <form method="dialog" class="modal-card large">
+        <div class="modal-head">
+          <h2 id="featureDialogTitle">Détails</h2>
+          <button class="icon-btn" value="cancel" aria-label="Fermer">×</button>
+        </div>
+        <div id="featureDialogBody"></div>
+      </form>
+    </dialog>
+
+    <dialog id="installDialog" class="modal">
+      <form method="dialog" class="modal-card">
+        <div class="modal-head">
+          <h2>Installer l’app</h2>
+          <button class="icon-btn" value="cancel" aria-label="Fermer">×</button>
+        </div>
+        <div id="installDialogBody"></div>
+        <div class="modal-actions">
+          <button value="cancel" class="secondary-btn">Fermer</button>
+        </div>
+      </form>
+    </dialog>
+
+
+    <dialog id="actionDialog" class="modal action-modal">
+      <form class="modal-card" method="dialog">
+        <div class="modal-head">
+          <h2 id="actionDialogTitle">Confirmation</h2>
+          <button id="actionDialogClose" class="icon-btn" type="button" aria-label="Fermer">×</button>
+        </div>
+        <div id="actionDialogBody" class="action-dialog-body"></div>
+        <div class="modal-actions action-dialog-actions">
+          <button id="actionDialogCancel" class="secondary-btn" type="button">Annuler</button>
+          <button id="actionDialogConfirm" class="primary-btn" type="button">Confirmer</button>
+        </div>
+      </form>
+    </dialog>
+
+    <template id="loadingTemplate">
+      <section class="card center-card">
+        <div class="loader"></div>
+        <p>Chargement des stats…</p>
+      </section>
+    </template>
+
+    <template id="errorTemplate">
+      <section class="card center-card error-card">
+        <h2>Connexion Firebase impossible</h2>
+        <p>
+          Vérifie les règles de lecture du Realtime Database ou héberge l’app sur Firebase Hosting.
+        </p>
+      </section>
+    </template>
+
+    <button id="backTopBtn" class="back-top" type="button" aria-label="Retour en haut" hidden>↑</button>
+
+    <script type="module" src="app.js?v=COV25"></script>
+  </body>
+</html>
